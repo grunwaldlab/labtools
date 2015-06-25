@@ -3,6 +3,8 @@
 
 # Labtools
 
+> NOTE: This tools is currenlty still under development and we do not suggest using it at this point.
+
 Lab tools is a R package currently under development to aid in the creation and maintenance of research notebooks. 
 By leveraging the functionality of `knitr`, `git`, and the Bootstrap web framework, this package allows for efficient creation of HTML lab notebooks from notes in Rmd files. 
 This facilitates reproducible, version controlled, easily shared research notes/analyses on all major operating systems using free, open source software. 
