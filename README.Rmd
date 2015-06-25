@@ -7,6 +7,7 @@ Labtools is a R package to aid in the creation and maintenance of research noteb
 **This package is mostly for in-lab own use, but could develop into something more official if others want to use it or contribute. It is not well supported or tested (yet).
 Contributions are welcome!**
 
+
 ## Installation
 
 Labtools is an R package available on GitHub, so it can be installed from the RStudio console or an R command line session using the `devtools` command `install_github`.
