@@ -8,11 +8,11 @@ pcr_table(count, additives = c(DNA = 1), additive_concentration = rep("",
   length(additives)))
 }
 \arguments{
-\item{count}{The number of PCR reactions.}
+\item{count}{(\code{integer} of length 1) The number of PCR reactions.}
 
-\item{additives}{The non-mastermix ingredients that will be added. Accepts a named numeric vector of volumes.}
+\item{additives}{(named \code{numeric}) The volume non-mastermix ingredients that will be added.}
 
-\item{additive_concentration}{The concentration of non-mastermix ingredients. Accepts a named numeric vector of concentrations.}
+\item{additive_concentration}{(named \code{numeric}) The concentration of non-mastermix ingredients.}
 }
 \description{
 Creates a markdown table for a PCR master mix recipe.

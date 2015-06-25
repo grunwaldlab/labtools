@@ -23,7 +23,7 @@ not specified.}
 Creates a markdown recipie for Qubit preparation.
 }
 \examples{
-qbit_recipie(8, 5)
+qubit_br_recipie(8, 5)
 }
 \keyword{Qubit}
 \keyword{qubit}

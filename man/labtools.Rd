@@ -4,8 +4,8 @@
 \name{labtools}
 \alias{labtools}
 \alias{labtools-package}
-\title{labtools.}
+\title{Labtools}
 \description{
-labtools.
+An assortment of functions for digital lab notebooks.
 }
 

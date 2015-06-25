@@ -7,9 +7,9 @@
 read_qubit(path, volume_used = NULL)
 }
 \arguments{
-\item{path}{The file path to the output file of Qubit measurments.}
+\item{path}{(\code{character} of length 1) The file path to the output file of Qubit measurments.}
 
-\item{volume_used}{The volume of sample added during dilution.}
+\item{volume_used}{(\code{numeric} of length 1) The volume of sample added during dilution.}
 }
 \description{
 Parses the output of the Qubit fluorometer into a dataframe. Since the Qubit stores data in the oppisite

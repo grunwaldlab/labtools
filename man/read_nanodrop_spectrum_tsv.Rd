@@ -7,9 +7,11 @@
 read_nanodrop_spectrum_tsv(path, average = TRUE)
 }
 \arguments{
-\item{path}{The file path to the spectrum .tsv output file of Nanodrop measurments.}
+\item{path}{(\code{character} of length 1) The file path to the .tsv output file of
+Nanodrop measurments.}
 
-\item{average}{If true, all numeric data for measurments with the same ID are averaged.}
+\item{average}{(\code{logical} of length 1) If \code{TRUE}, all numeric data for
+measurments with the same ID are averaged.}
 }
 \description{
 Parses the spectrum output of the Nanodrop spectrophotometer into a dataframe.

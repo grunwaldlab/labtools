@@ -1,9 +1,3 @@
-volume_for_dilution <- function(initial_conc, final_volume, final_conc = min(initial_conc)) {
-  initial_volume <- (final_conc * final_volume) / initial_conc
-  volume_added <- final_volume - initial_volume
-  return(list(initial_volume=initial_volume, volume_added=volume_added))
-}
-
 #===================================================================================================
 #' Creates table of dilutions instructions
 #'
@@ -17,7 +11,12 @@ volume_for_dilution <- function(initial_conc, final_volume, final_conc = min(ini
 #' @keywords dilution
 #' @export
 volume_for_dilution_table <- function(initial_conc, final_volume, final_conc = min(initial_conc), id=names(initial_conc), display=TRUE, ...) {
-  #Generate table of dilution values
+  volume_for_dilution <- function(initial_conc, final_volume, final_conc = min(initial_conc)) {
+    initial_volume <- (final_conc * final_volume) / initial_conc
+    volume_added <- final_volume - initial_volume
+    return(list(initial_volume=initial_volume, volume_added=volume_added))
+  }
+  #Generate table of dilution values ---------------------------------------------------------------
   data <- volume_for_dilution(initial_conc, final_volume, final_conc)
   output_table <- data.frame(ID=1:length(data[[1]]))
   if (!is.null(id)) {
@@ -27,7 +26,7 @@ volume_for_dilution_table <- function(initial_conc, final_volume, final_conc = m
   output_table[, 'Sample Vol.'] <- data$initial_volume
   output_table[, 'Solvent Vol.'] <- data$volume_added
   
-  #generate header and contextual table columns
+  #generate header and contextual table columns ----------------------------------------------------
   output_header <- sprintf("Dilution table for **%d** samples.\n", length(initial_conc))
   if (length(unique(final_volume)) == 1) {
     output_header <- c(output_header, sprintf("All samples will be diluted to a final volume of **%f**.", final_volume))
@@ -40,7 +39,7 @@ volume_for_dilution_table <- function(initial_conc, final_volume, final_conc = m
     output_table[, 'Final Conc.'] <- data$final_conc
   }
   
-  #print results
+  #print results -----------------------------------------------------------------------------------
   if (display) {
     writeLines(output_header)
     writeLines("")
@@ -55,14 +54,18 @@ volume_for_dilution_table <- function(initial_conc, final_volume, final_conc = m
 #'
 #' Creates a markdown table of dilution factors and final concentrations for serial dilutions given 
 #' a range of desired concentrations, the number of dilutions, and the final volume. 
+#' 
 #' @param range The inclusive range of concentrations to produce. Takes a numeric vector of length 2.
 #' @param dilutions The number of dilutions to perform. Takes a numeric vector of length 1.
 #' @param volume The final volume of the dilutions. 
 #' @param units The units of volume used. Default: "&mu;L".
+#' 
 #' @keywords dilutions dilute serial
-#' @export
+#' 
 #' @examples
 #' serial_dilution_table(c(5,.00005), 5, 75)
+#' 
+#' @export
 serial_dilution_table <- function(range, dilutions, volume, units="&mu;L") {
   significant_figures <- 4
   base <- 10
@@ -82,19 +85,24 @@ serial_dilution_table <- function(range, dilutions, volume, units="&mu;L") {
   return(data)
 }
 
+#===================================================================================================
 #' Creates a markdown recipie for Qubit preparation 
 #'
 #' Creates a markdown recipie for Qubit preparation. 
+#' 
 #' @param count The number of samples to be measured.
 #' @param expected The expected concentration of the DNA to be measured. Used to estimate the volume_added if
 #'  not specified.
 #' @param volume_added The amount of sample to be diluted to 200&mu;L.
 #' @param standards TRUE/FALSE for wether standards will be made. 
 #' @param safety_factor A factor that will be multiplied to the exact amount of working solution needed.
+#' 
 #' @keywords Qubit qubit
-#' @export
+#' 
 #' @examples
-#' qbit_recipie(8, 5)
+#' qubit_br_recipie(8, 5)
+#' 
+#' @export
 qubit_br_recipie <- function(count, expected=NA, volume_added=NA, standards=TRUE, safety_factor=1.1) {
   sig_figs <- 4
   optimize_volume_added <- function(expected) {

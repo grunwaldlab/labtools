@@ -2,9 +2,14 @@
 #' Parses the output of the Nanodrop spectrophotometer
 #'
 #' Parses the output of the Nanodrop spectrophotometer into a dataframe.
-#' @param path The file path to the .tsv output file of Nanodrop measurments.
-#' @param average If true, all numeric data for measurments with the same ID are averaged.
+#' 
+#' @param path (\code{character} of length 1) The file path to the .tsv output file of
+#' Nanodrop measurments.
+#' @param average (\code{logical} of length 1) If \code{TRUE}, all numeric data for
+#' measurments with the same ID are averaged.
+#' 
 #' @keywords nanodrop Nanodrop spectrophotometer
+#' 
 #' @export
 read_nanodrop_tsv <- function(path, average=TRUE) {
   data_format <- "%m/%d/%Y %I:%M:%S %p"
@@ -29,9 +34,14 @@ read_nanodrop_tsv <- function(path, average=TRUE) {
 #' Parses the spectrum output of the Nanodrop spectrophotometer
 #'
 #' Parses the spectrum output of the Nanodrop spectrophotometer into a dataframe.
-#' @param path The file path to the spectrum .tsv output file of Nanodrop measurments.
-#' @param average If true, all numeric data for measurments with the same ID are averaged.
+#' 
+#' @param path (\code{character} of length 1) The file path to the .tsv output file of
+#' Nanodrop measurments.
+#' @param average (\code{logical} of length 1) If \code{TRUE}, all numeric data for
+#' measurments with the same ID are averaged.
+#' 
 #' @keywords nanodrop Nanodrop spectrophotometer spectrum
+#' 
 #' @export
 read_nanodrop_spectrum_tsv <- function(path, average=TRUE) {
   split_at <- function(x, pos) unname(split(x, cumsum(seq_along(x) %in% pos)))
@@ -67,9 +77,12 @@ read_nanodrop_spectrum_tsv <- function(path, average=TRUE) {
 #' order that the tubes are inserted, the rows order will be reversed (i.e. the first row will be the first
 #' measured).
 #' NOTE: if a sample is too low and has a < symbol, this function does not handle it correctly yet!
-#' @param path The file path to the output file of Qubit measurments.
-#' @param volume_used The volume of sample added during dilution.
+#' 
+#' @param path (\code{character} of length 1) The file path to the output file of Qubit measurments.
+#' @param volume_used (\code{numeric} of length 1) The volume of sample added during dilution.
+#' 
 #' @keywords qubit Qubit
+#' 
 #' @export
 read_qubit <- function(path, volume_used=NULL) {
   data <- read.csv(path, header=TRUE, fileEncoding="latin1")

@@ -1,24 +1,21 @@
 Package: labtools
 Title: Lab notebook tools
-Version: 0.4.11
+Version: 0.5.00
 Authors@R: "Zachary Foster <zacharyfoster1989@gmail.com> [aut, cre]"
 Description: A set of functions to aid in planning, documenting, and analyzing
     labratory experiments using a markdown lab notebook.
 Depends: 
     R (>= 3.1.0)
-License: Creative Commons
+License: GPL-2 | GPL-3
 LazyData: true
-Imports: knitr,
-    lubridate,
+Imports: lubridate,
     plyr,
     xtable,
     plotrix,
     ggplot2,
-    packrat,
-    rmarkdown,
     yaml,
-    rstudioapi,
-    XML
+    reshape2,
+    stringr
 Suggests: testthat,
     knitr
 VignetteBuilder: knitr

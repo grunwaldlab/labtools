@@ -12,8 +12,10 @@ element in the list representing a stage in a profile with the 2-element numeric
 representing the temperature and time. Optionally, a named list of the data structure described
 above can be supplied to split the stages into named groups (see example).}
 
+\item{repeats}{(\code{integer}) The number of times each \code{profile} is repeated.}
+
 \item{width}{(\code{numeric}) The relative width of groupings in the graphical output. By
-default, the width of each group will be proportional to the number of stage it contains.}
+ default, the width of each group will be proportional to the number of stage it contains.}
 }
 \description{
 Creates a thermocycler profile in either graphical or verbal form. This is intended to be used

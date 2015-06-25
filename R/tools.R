@@ -1,7 +1,7 @@
 #===================================================================================================
 #' Copy folders with links
 #' 
-#' Copies folders like \link{\code{file.copy}} except it replicates links correctly on unix-like 
+#' Copies folders like \code{\link{file.copy}} except it replicates links correctly on unix-like 
 #' systems.
 #' 
 #' @param from (\code{character}) The path to the folder to be copied
@@ -50,22 +50,4 @@ get_rmd_yaml <- function(path, attribute, default = "") {
     return(as.character(default))
   }
   vapply(path, do_once, character(1)) 
-}
-
-
-
-
-#` http://rosettacode.org/wiki/Find_common_directory_path
-get_common_dir <- function(paths, delim = .Platform$file.sep)
-{
-  path_chunks <- strsplit(paths, delim)
-  
-  i <- 1
-  repeat({
-    current_chunk <- sapply(path_chunks, function(x) x[i])
-    if(any(current_chunk != current_chunk[1])) break
-    i <- i + 1
-  })
-  paste(path_chunks[[1]][seq_len(i - 1)], collapse = delim)
-  
 }

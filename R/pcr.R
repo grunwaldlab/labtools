@@ -2,13 +2,17 @@
 #' Creates table for PCR recipie
 #'
 #' Creates a markdown table for a PCR master mix recipe.
-#' @param count The number of PCR reactions.
-#' @param additives The non-mastermix ingredients that will be added. Accepts a named numeric vector of volumes.
-#' @param additive_concentration The concentration of non-mastermix ingredients. Accepts a named numeric vector of concentrations.
+#' 
+#' @param count (\code{integer} of length 1) The number of PCR reactions.
+#' @param additives (named \code{numeric}) The volume non-mastermix ingredients that will be added.
+#' @param additive_concentration (named \code{numeric}) The concentration of non-mastermix ingredients.
+#' 
 #' @keywords PCR
-#' @export
+#' 
 #' @examples
 #' pcr_table(count=8, additives=c(DNA=1, other=7))
+#' 
+#' @export
 pcr_table <- function(count, additives=c(DNA=1), additive_concentration=rep('', length(additives))) {
   master_mix_volume = 19.75 - sum(additives)
   data <- data.frame(Component=c("Water", "10x Buffer", "dNTP", "Primer 1", "Primer 2", "Taq", names(additives)),
@@ -36,10 +40,13 @@ pcr_table <- function(count, additives=c(DNA=1), additive_concentration=rep('', 
 #' @param profile (\code{list(list(vector(2)))}) A list of named 2-element numeric vectors, each
 #'  element in the list representing a stage in a profile with the 2-element numeric vector 
 #'  representing the temperature and time. Optionally, a named list of the data structure described
-#'  above can be supplied to split the stages into named groups (see example). 
+#'  above can be supplied to split the stages into named groups (see example).
+#' @param repeats (\code{integer}) The number of times each \code{profile} is repeated.
 #' @param width (\code{numeric}) The relative width of groupings in the graphical output. By
 #'  default, the width of each group will be proportional to the number of stage it contains.
+#'  
 #' @seealso \code{\link{pcr_profile}}
+#' 
 #' @export
 thermocycler_profile <- function(profile, repeats = NULL, width = NULL) {
   # Argument validation ----------------------------------------------------------------------------
@@ -108,20 +115,23 @@ thermocycler_profile <- function(profile, repeats = NULL, width = NULL) {
 #' \code{\link{thermocycler_profile}}. All temperature and time parameters take \code{numeric}
 #' inputs in celsius and seconds respectively.
 #' 
-#' @param cycles (\code{integer}) 
-#' @param init_tm The initial heating temperature used before cycling starts.
-#' @param init_time The duration of the initial heating used before cycling starts.
-#' @param denat_tm The temperature of the denaturation step.
-#' @param denat_time The duration of the denaturation step.
-#' @param anneal_tm The temperature of the annealing step.
-#' @param anneal_time The duration of the annealing step.
-#' @param elong_tm The temperature of the elongation step.
-#' @param elong_time The duration of the elongation step.
-#' @param final_tm The temperature of the final elongation step used after cycling completes.
-#' @param final_time The duration of the final elongation step used after cycling completes.
-#' @param hold_tm The temperature used after all other steps to hold the sample.
+#' @param cycles (\code{integer}) The number of cycles.
+#' @param init_tm (\code{numeric}) The initial heating temperature used before cycling starts.
+#' @param init_time (\code{numeric}) The duration of the initial heating used before cycling starts.
+#' @param denat_tm (\code{numeric}) The temperature of the denaturation step.
+#' @param denat_time (\code{numeric}) The duration of the denaturation step.
+#' @param anneal_tm (\code{numeric}) The temperature of the annealing step.
+#' @param anneal_time (\code{numeric}) The duration of the annealing step.
+#' @param elong_tm (\code{numeric}) The temperature of the elongation step.
+#' @param elong_time (\code{numeric}) The duration of the elongation step.
+#' @param final_tm (\code{numeric}) The temperature of the final elongation step used after cycling completes.
+#' @param final_time (\code{numeric}) The duration of the final elongation step used after cycling completes.
+#' @param hold_tm (\code{numeric}) The temperature used after all other steps to hold the sample.
+#' 
 #' @keywords PCR
+#' 
 #' @seealso \code{\link{thermocycler_profile}}
+#' 
 #' @export
 pcr_profile <- function(cycles = 30, init_tm = 95, init_time = 300, denat_tm = 96,
                         denat_time = 25, anneal_tm = 55, anneal_time = 30, elong_tm = 72,
