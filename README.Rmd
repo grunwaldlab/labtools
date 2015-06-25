@@ -2,9 +2,10 @@
 
 [![Build Status](https://travis-ci.org/grunwaldlab/labtools.png?branch=master)](https://travis-ci.org/grunwaldlab/labtools?branch=master)
 
-Lab tools is a R package to aid in the creation and maintenance of research notebooks.
-It is mostly for my own use, but could develop into something more official if others want to use it or contribute. 
-Contributions are welcome!
+Labtools is a R package to aid in the creation and maintenance of research notebooks.
+
+**This package is mostly for in-lab own use, but could develop into something more official if others want to use it or contribute. It is not well supported or tested (yet).
+Contributions are welcome!**
 
 ## Installation
 
