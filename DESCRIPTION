@@ -1,5 +1,5 @@
 Package: labtools
-Title: Lab notebook tools
+Title: Lab Notebook Tools
 Version: 0.5.00
 Authors@R: "Zachary Foster <zacharyfoster1989@gmail.com> [aut, cre]"
 Description: A set of functions to aid in planning, documenting, and analyzing
@@ -18,4 +18,3 @@ Imports: lubridate,
     stringr
 Suggests: testthat,
     knitr
-VignetteBuilder: knitr
