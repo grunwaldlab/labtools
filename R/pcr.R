@@ -88,11 +88,11 @@ thermocycler_profile <- function(profile, repeats = NULL, width = NULL) {
     my_grob[["widths"]][panels] <- plyr::llply(width, grid::unit, units="null")
     return(my_grob)
   }
-  my_plot <- ggplot2::ggplot(data = data, ggplot2::aes(x = time, y = temp)) +
+  my_plot <- ggplot2::ggplot(data = data, ggplot2::aes_string(x = "time", y = "temp")) +
     ggplot2::geom_line() +
-    ggplot2::geom_text(size = 4, hjust=-.03, vjust=-.4, ggplot2::aes(label = stage)) +
-    ggplot2::geom_text(size = 4, hjust=-.03, vjust=1.4, ggplot2::aes(label = label)) +
-    ggplot2::facet_grid(.~ group, scales = "free_x") +
+    ggplot2::geom_text(size = 4, hjust=-.03, vjust=-.4, ggplot2::aes_string(label = "stage")) +
+    ggplot2::geom_text(size = 4, hjust=-.03, vjust=1.4, ggplot2::aes_string(label = "label")) +
+    ggplot2::facet_grid(. ~ group, scales = "free_x") +
     ggplot2::labs(x="Run Time (Minutes)", y = "Temperature (C)") +
     ggplot2::scale_y_continuous(expand = c(.2, 0)) +
     ggplot2::theme(#panel.margin = grid::unit(0, "inches"),
