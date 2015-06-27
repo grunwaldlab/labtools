@@ -4,7 +4,7 @@
 \alias{print_table}
 \title{Standardizes the printing of data.frames}
 \usage{
-print_table(data, column_names = NA, colors = NA, ...)
+print_table(data, column_names = NA, colors = NA, md = FALSE, ...)
 }
 \arguments{
 \item{data}{The data frame to be printed}
@@ -13,6 +13,8 @@ print_table(data, column_names = NA, colors = NA, ...)
 
 \item{colors}{The columns of 'data' that should be colored based of their numeric content (e.g. data[, c('my_col'), drop=FALSE]).
 Also accepted: A named list of vectors with names indicating columns of data and values indicating colors for the corresponding cells of 'data'.}
+
+\item{md}{(\code{logical} of length 1) If \code{TRUE}, return a markdown table istead of HTML.}
 
 \item{...}{Additional key word arguments are passed to \code{\link[xtable]{print.xtable}}}
 }

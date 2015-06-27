@@ -36,9 +36,9 @@ color_table <- function(table_html, columns, colors) {
                                    na.color="#FFFFFF",
                                    cs1=c(.7,.7,1), cs2=c(.7,1,.7), cs3=c(1,.7,.7))
   #find locations of all <TD ..> tags
-  td_locations <- gregexpr(pattern ='<TD', table_html, fixed=TRUE)[[1]] + 3
+  td_locations <- gregexpr(pattern ='<TD', table_html, ignore.case = TRUE)[[1]] + 3
   #Infer number of columns from cound of header <TH ...> tags
-  column_count <- length(gregexpr(pattern ='<TH', table_html, fixed=TRUE)[[1]])
+  column_count <- length(gregexpr(pattern ='<TH', table_html, ignore.case = TRUE)[[1]])
   #structure the <TD> locations in the same way 'colors' is structured
   td_locations <- as.data.frame(matrix(td_locations, ncol=column_count, byrow=TRUE))
   td_locations <- td_locations[,columns]
@@ -58,9 +58,10 @@ color_table <- function(table_html, columns, colors) {
 #' @param column_names Acharacter vector of column names to be applied.
 #' @param colors The columns of 'data' that should be colored based of their numeric content (e.g. data[, c('my_col'), drop=FALSE]).
 #' Also accepted: A named list of vectors with names indicating columns of data and values indicating colors for the corresponding cells of 'data'. 
+#' @param md (\code{logical} of length 1) If \code{TRUE}, return a markdown table istead of HTML.
 #' @param ... Additional key word arguments are passed to \code{\link[xtable]{print.xtable}}
 #' @export
-print_table <- function(data, column_names=NA, colors=NA, ...) {
+print_table <- function(data, column_names=NA, colors=NA, md = FALSE, ...) {
   original_names <-  names(data)
   if (is.character(column_names)) {
     names(data) <- column_names
@@ -69,16 +70,20 @@ print_table <- function(data, column_names=NA, colors=NA, ...) {
   data[, numeric_cols] <- lapply(data[, numeric_cols, drop=FALSE], signif, digits=3)
   data[] <- lapply(data, as.character)
   data[is.na(data)] <- ""
-  output_table <- print(xtable::xtable(data),
-                        type = "html",
-                        print.results=FALSE,
-                        sanitize.text.function = function(x) {x}, 
-                        ...)
-  if (is.list(colors)) {
-    colored_cols <- which(sapply(original_names, function(x) x %in% names(colors))) + 1
-    output_table <- color_table(output_table, colored_cols, colors)
+  if (md) {
+    print(knitr::kable(data))
+  } else {
+    output_table <- print(xtable::xtable(data),
+                          type = "html",
+                          print.results=FALSE,
+                          sanitize.text.function = function(x) {x}, 
+                          ...)
+    if (is.list(colors)) {
+      colored_cols <- which(sapply(original_names, function(x) x %in% names(colors))) + 1
+      output_table <- color_table(output_table, colored_cols, colors)
+    }
+    x <- cat(output_table)
   }
-  x <- cat(output_table)
 }
 
 

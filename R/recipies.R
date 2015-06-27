@@ -43,7 +43,7 @@ volume_for_dilution_table <- function(initial_conc, final_volume, final_conc = m
   if (display) {
     writeLines(output_header)
     writeLines("")
-    print_table(output_table)    
+    print_table(output_table, md = TRUE)    
   }
   
   return(output_table)
@@ -81,7 +81,7 @@ serial_dilution_table <- function(range, dilutions, volume, units="&mu;L") {
                    signif(volume, significant_figures), units,
                    " of solvent:\n", sep=""))
   writeLines("")
-  print_table(data)
+  print_table(data, md = TRUE)
   return(data)
 }
 

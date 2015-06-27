@@ -26,7 +26,7 @@ pcr_table <- function(count, additives=c(DNA=1), additive_concentration=rep('', 
   
   writeLines(paste("PCR ingredients for ", count, ", ", data$Single[nrow(data)], "&mu;L reactions:", sep=""))
   writeLines("")
-  print_table(data)
+  print_table(data, md = TRUE)
   writeLines("")
   return(data)
 }
