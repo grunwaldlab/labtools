@@ -4,7 +4,7 @@
 \alias{read_nanodrop_spectrum_tsv}
 \title{Parses the spectrum output of the Nanodrop spectrophotometer}
 \usage{
-read_nanodrop_spectrum_tsv(path, average = TRUE)
+read_nanodrop_spectrum_tsv(path, average = TRUE, melt = FALSE)
 }
 \arguments{
 \item{path}{(\code{character} of length 1) The file path to the .tsv output file of
@@ -12,6 +12,8 @@ Nanodrop measurments.}
 
 \item{average}{(\code{logical} of length 1) If \code{TRUE}, all numeric data for
 measurments with the same ID are averaged.}
+
+\item{melt}{(\code{logical} of length 1) If \code{TRUE}, melt data for use in ggplot2.}
 }
 \description{
 Parses the spectrum output of the Nanodrop spectrophotometer into a dataframe.

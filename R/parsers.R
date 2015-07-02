@@ -39,11 +39,12 @@ read_nanodrop_tsv <- function(path, average=TRUE) {
 #' Nanodrop measurments.
 #' @param average (\code{logical} of length 1) If \code{TRUE}, all numeric data for
 #' measurments with the same ID are averaged.
+#' @param melt (\code{logical} of length 1) If \code{TRUE}, melt data for use in ggplot2.
 #' 
 #' @keywords nanodrop Nanodrop spectrophotometer spectrum
 #' 
 #' @export
-read_nanodrop_spectrum_tsv <- function(path, average=TRUE) {
+read_nanodrop_spectrum_tsv <- function(path, average=TRUE, melt=FALSE) {
   split_at <- function(x, pos) unname(split(x, cumsum(seq_along(x) %in% pos)))
   data <- sapply(path, function(x) c(readLines(x), '', ''))
   data <- split_at(data, which(data == ''))
@@ -67,6 +68,9 @@ read_nanodrop_spectrum_tsv <- function(path, average=TRUE) {
   }
   rownames(data) <- wavelength[[1]]
   colnames(data) <- sample_id
+  if (melt) {
+    data <- reshape2::melt(data, value.name="absorbance", varnames=c("wavelength", "sample"))
+  }
   return(data)
 }
 
