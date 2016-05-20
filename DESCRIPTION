@@ -4,11 +4,12 @@ Version: 0.5.00
 Authors@R: "Zachary Foster <zacharyfoster1989@gmail.com> [aut, cre]"
 Description: A set of functions to aid in planning, documenting, and analyzing
     labratory experiments using a markdown lab notebook.
-Depends: 
+Depends:
     R (>= 3.1.0)
 License: GPL-2 | GPL-3
 LazyData: true
-Imports: lubridate,
+Imports:
+    lubridate,
     plyr,
     xtable,
     plotrix,
@@ -16,5 +17,7 @@ Imports: lubridate,
     yaml,
     reshape2,
     stringr
-Suggests: testthat,
+Suggests:
+    testthat,
     knitr
+RoxygenNote: 5.0.1
