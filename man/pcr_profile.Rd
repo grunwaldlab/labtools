@@ -43,4 +43,3 @@ inputs in celsius and seconds respectively.
 \code{\link{thermocycler_profile}}
 }
 \keyword{PCR}
-

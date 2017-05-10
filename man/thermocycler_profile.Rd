@@ -24,4 +24,3 @@ with arbitrary profiles. For generic PCR profiles, use \code{\link{pcr_profile}}
 \seealso{
 \code{\link{pcr_profile}}
 }
-

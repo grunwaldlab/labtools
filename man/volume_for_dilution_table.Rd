@@ -25,4 +25,3 @@ volume_for_dilution_table(initial_conc, final_volume,
 Creates table of dilutions instructions.
 }
 \keyword{dilution}
-

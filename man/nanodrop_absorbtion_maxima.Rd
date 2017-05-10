@@ -9,4 +9,3 @@ nanodrop_absorbtion_maxima()
 \description{
 Adds lines in a ggplot2 plot for the maximal absorption of compunds relevent to molecular biology.
 }
-

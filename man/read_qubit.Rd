@@ -19,4 +19,3 @@ NOTE: if a sample is too low and has a < symbol, this function does not handle i
 }
 \keyword{Qubit}
 \keyword{qubit}
-

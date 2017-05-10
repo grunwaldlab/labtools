@@ -16,4 +16,3 @@ color_table(table_html, columns, colors)
 \description{
 Add color css to table ?
 }
-

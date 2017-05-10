@@ -12,4 +12,3 @@ depth(this)
 \description{
 \url{http://stackoverflow.com/questions/13432863/determine-level-of-nesting-in-r}
 }
-

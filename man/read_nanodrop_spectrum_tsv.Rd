@@ -22,4 +22,3 @@ Parses the spectrum output of the Nanodrop spectrophotometer into a dataframe.
 \keyword{nanodrop}
 \keyword{spectrophotometer}
 \keyword{spectrum}
-

@@ -16,4 +16,3 @@ The path to the current project's root
 Finds the current project's root directory from any subdirectory by looking through the file 
 path for a .Proj extension.
 }
-

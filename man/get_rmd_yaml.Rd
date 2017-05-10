@@ -16,4 +16,3 @@ get_rmd_yaml(path, attribute, default = "")
 \description{
 Gets a given attribute, based on the key, from a YAML file.
 }
-

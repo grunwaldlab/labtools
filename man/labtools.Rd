@@ -8,4 +8,3 @@
 \description{
 An assortment of functions for digital lab notebooks.
 }
-

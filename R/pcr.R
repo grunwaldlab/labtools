@@ -1,34 +1,64 @@
-#===================================================================================================
 #' Creates table for PCR recipie
 #'
 #' Creates a markdown table for a PCR master mix recipe.
 #' 
-#' @param count (\code{integer} of length 1) The number of PCR reactions.
-#' @param additives (named \code{numeric}) The volume non-mastermix ingredients that will be added.
-#' @param additive_concentration (named \code{numeric}) The concentration of non-mastermix ingredients.
-#' 
-#' @keywords PCR
-#' 
-#' @examples
-#' pcr_table(count=8, additives=c(DNA=1, other=7))
-#' 
+#' @param rxn_count The number of PCR reactions.
+#' @param rxn_volume The total volume of each reaction
+#' @param template_volume How much template to add
+#' @param safety How much extra master mix to make to account for errors. For example 1.1 would be \%10 extra.
+#' @param checklist If TRUE, print check list
 #' @export
-pcr_table <- function(count, additives=c(DNA=1), additive_concentration=rep('', length(additives))) {
-  master_mix_volume = 19.75 - sum(additives)
-  data <- data.frame(Component=c("Water", "10x Buffer", "dNTP", "Primer 1", "Primer 2", "Taq", names(additives)),
-                     Concentration=c("", "", "10mM", "10&mu;M", "10&mu;M", "", additive_concentration),
-                     Single=c(master_mix_volume, 2.5, .5, 1, 1, .25, additives),
-                     stringsAsFactors=FALSE)
-  data$Total <- data$Single * count
-  data$Safe <- data$Total * 1.1
-  data[data$Component %in% names(additives), c("Total", "Safe")] = 0
-  data <- rbind(data, c(Component="Total", Concentration="", Single=sum(data$Single), Total=sum(data$Total), Safe=sum(data$Safe)))
+platinum_pcr_recipe <- function(rxn_count, rxn_volume, template_volume, safety = 1.1, checklist = TRUE) {
+  # print description
+  cat(paste0("Recipe for ", rxn_count, " ", rxn_volume, "uL reactions with a safety factor of ", safety, ".\n"))
   
-  writeLines(paste("PCR ingredients for ", count, ", ", data$Single[nrow(data)], "&mu;L reactions:", sep=""))
-  writeLines("")
-  print_table(data, md = TRUE)
-  writeLines("")
-  return(data)
+  # Define components and concentrations
+  pcr <- data.frame(stringsAsFactors = FALSE, 
+                    component = c("Water", "10X PCR buffer -Mg", "50mM MgCl2", "10mM dNTP mix",
+                                  "10uM ITS6", "10uM ITS4", "Template DNA", "Platinum Taq"),
+                    conc = c(NA, 10, 50, 10, 10, 10, NA, 10),
+                    conc_unit = c(NA, "X", "mM", "mM", "uM", "uM", NA, "U"),
+                    rxn_conc = c(NA, 1, 1.5, 0.2, 0.2, 0.2, NA, 0.04))
+  
+  # Infer volume of components for one reaction
+  pcr$per_tube <- pcr$rxn_conc / pcr$conc * rxn_volume
+  pcr$per_tube[pcr$component ==  "Template DNA"] <- template_volume
+  pcr$per_tube[pcr$component ==  "Water"] <- rxn_volume - sum(pcr$per_tube, na.rm = TRUE)
+  
+  # Infer master mix volumes 
+  pcr$master_mix <- pcr$per_tube * rxn_count * safety
+  pcr$master_mix[pcr$component == "Template DNA"] <- 0
+  
+  # Add component conc to display
+  pcr$component_conc <- paste(pcr$rxn_conc, pcr$conc_unit)
+  pcr$component_conc[pcr$component_conc == "NA NA"] <- NA 
+  
+  # Add "total" row
+  pcr <- rbind(pcr, c("Total", NA, NA, NA, sum(pcr$per_tube), sum(pcr$master_mix), NA))
+  
+  # Display 
+  cat(paste0("PCR recipe for ", rxn_count, " ", rxn_volume, "uL reactions with ",  template_volume, "uL of template each:"))
+  pcr_to_display <- pcr[, c("component", "component_conc", "per_tube", "master_mix")]
+  names(pcr_to_display) <- c("Component", "Concentration", "Volume per tube", "Volume in master mix")
+
+  # Checklist
+  if (checklist) {
+    cat(
+"
+[ ] Clean workspace   
+[ ] Thaw reagents + template    
+[ ] Label tubes   
+[ ] Vortex and centrifudge reagents + template
+[ ] Make master mix
+[ ] Add master mix   
+[ ] Add template   
+[ ] Vortex and centrifudge reactions   
+[ ] Check for bubbles
+"
+)
+  }
+  
+  return(knitr::kable(pcr_to_display))
 }
 
 #===================================================================================================

@@ -3,7 +3,7 @@
 export(get_project_root)
 export(nanodrop_absorbtion_maxima)
 export(pcr_profile)
-export(pcr_table)
+export(platinum_pcr_recipe)
 export(print_table)
 export(qubit_br_recipie)
 export(read_nanodrop_spectrum_tsv)

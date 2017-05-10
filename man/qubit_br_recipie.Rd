@@ -28,4 +28,3 @@ qubit_br_recipie(8, 5)
 }
 \keyword{Qubit}
 \keyword{qubit}
-

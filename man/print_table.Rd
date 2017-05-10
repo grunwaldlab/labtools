@@ -21,4 +21,3 @@ Also accepted: A named list of vectors with names indicating columns of data and
 \description{
 Standardizes the printing of data.frames and allows for renaming of columns without changing original data.frame.
 }
-

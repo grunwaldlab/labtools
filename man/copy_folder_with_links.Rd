@@ -15,4 +15,3 @@ copy_folder_with_links(from, to)
 Copies folders like \code{\link{file.copy}} except it replicates links correctly on unix-like 
 systems.
 }
-

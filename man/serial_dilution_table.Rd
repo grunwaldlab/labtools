@@ -26,4 +26,3 @@ serial_dilution_table(c(5,.00005), 5, 75)
 \keyword{dilute}
 \keyword{dilutions}
 \keyword{serial}
-
